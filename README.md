@@ -21,7 +21,7 @@ A web application that allows users to interact with OpenAI's realtime voice mod
 
 ### Usage
 
-1. Visit the [live demo](https://yourusername.github.io/openai-realtime-voice/) or host the application yourself
+1. Visit the [live demo](https://aminanvary.github.io/openai-realtime-voice/) or host the application yourself
 2. Enter your OpenAI API key
 3. Select your preferred model (GPT-4o or GPT-4o mini)
 4. Choose a voice for the AI responses
