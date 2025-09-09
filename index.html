@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenAI Realtime</title>
+    <title>OpenAI GPT Realtime Voice</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -440,7 +440,7 @@
         <header>
             <div class="title-container">
                 <i class="fas fa-robot logo"></i>
-                <h1>OpenAI Realtime</h1>
+                <h1>GPT Realtime Voice</h1>
             </div>
             <button id="themeToggle" class="theme-toggle" title="Toggle Dark/Light Mode">
                 <i class="fas fa-sun"></i>
@@ -456,17 +456,19 @@
             <div class="form-group">
                 <label for="voiceSelect">Assistant Voice:</label>
                 <select id="voiceSelect">
-                    <option value="sol">Sol</option>
-                    <option value="verse">Verse</option>
+                    <option value="cedar">Cedar</option>
+                    <option value="marin">Marin</option>
                 </select>
             </div>
             
             <div class="form-group">
                 <label for="modelSelect">Model:</label>
-                <select id="modelSelect">
-                    <option value="gpt-4o-realtime-preview-2024-12-17">GPT-4o Realtime</option>
-                    <option value="gpt-4o-mini-realtime-preview-2024-12-17">GPT-4o Mini Realtime</option>
+                <select id="modelSelect" disabled>
+                    <option value="gpt-realtime">GPT Realtime</option>
                 </select>
+                <small class="model-description" style="color: var(--light-text); font-size: 14px; display: block; margin-top: 5px;">
+                    The latest OpenAI realtime model with speech-to-speech capabilities
+                </small>
             </div>
             
             <div class="controls">
@@ -541,26 +543,24 @@
         // Save user preferences
         function savePreferences() {
             localStorage.setItem('voice', voiceSelect.value);
-            localStorage.setItem('model', modelSelect.value);
+            // No longer save model since there's only one
         }
         
         // Load user preferences
         function loadPreferences() {
             const savedVoice = localStorage.getItem('voice');
-            const savedModel = localStorage.getItem('model');
             
             if (savedVoice) {
                 voiceSelect.value = savedVoice;
             }
             
-            if (savedModel) {
-                modelSelect.value = savedModel;
-            }
+            // Set the only available model
+            modelSelect.value = 'gpt-realtime';
         }
         
         // Add event listeners for preference saving
         voiceSelect.addEventListener('change', savePreferences);
-        modelSelect.addEventListener('change', savePreferences);
+        // Model select is disabled, no need for change event
         
         // Call on page load
         loadThemePreference();
@@ -776,8 +776,8 @@
                 const offer = await peerConnection.createOffer();
                 await peerConnection.setLocalDescription(offer);
                 
-                // Use the correct model name with preview date
-                const model = modelSelect.value;
+                // Use the new gpt-realtime model
+                const model = 'gpt-realtime';
                 const voice = voiceSelect.value;
                 
                 // Send offer to OpenAI server using the correct endpoint and format
